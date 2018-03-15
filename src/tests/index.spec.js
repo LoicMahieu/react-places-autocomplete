@@ -221,6 +221,26 @@ describe('customizable autocompleteItem', () => {
       <i className="fa fa-map-marker" />
     );
   });
+
+  it('lets you provide a custom input', () => {
+    const renderInput = inputProps => (
+      <div className="my-fancy-input">
+        <div className="that-need-a-very-custom-markup">
+          <input {...inputProps} />
+        </div>
+      </div>
+    );
+    const wrapper = shallow(
+      <PlacesAutocomplete
+        inputProps={testInputProps}
+        renderInput={renderInput}
+      />
+    );
+    expect(wrapper.find('.my-fancy-input')).to.have.length(1);
+    expect(
+      wrapper.find('.my-fancy-input .that-need-a-very-custom-markup')
+    ).to.have.length(1);
+  });
 });
 
 describe('custom inline styles', () => {
